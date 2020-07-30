@@ -1,0 +1,74 @@
+#wrap {
+    z-index: 999999;
+    right: 10;
+    width:90%;
+    text-align: center;
+    vertical-align: center;
+    display: table;
+}
+
+
+.title {
+    position: absolute;
+    width: 95%;
+    padding: 20;
+    text-align: right;  
+    background-color: lightgreen;
+    border: solid black;
+
+}
+
+.friends {
+    position: absolute;
+    float : left;
+    border: solid black;
+    top: 210;
+    width: 10%;
+    padding-left: 10;
+    text-align: left;
+    background-color: red;
+    color: white;
+}
+
+.hyperlink {
+    color: white;
+    text-decoration: none;
+}
+
+.hyperlink:hover {
+    color:red;
+}
+
+.firstEntry {
+    position: absolute;
+    border: solid black;
+    top: 210;
+    left: 250;
+    right: 40;
+    padding: 10;
+    text-align:left;       
+    background-color: plum;
+}
+
+.blogfirstEntry {
+    display: flex;
+    flex-direction: row;    
+    margin-right: auto
+}
+
+.secondEntry {
+    position: absolute;
+    border: solid black;
+    top: 580;
+    left: 250;
+    right: 40;
+    padding: 10;
+    text-align:left;       
+    background-color: plum;
+}
+
+.blogSecondEntry {
+    display: flex;
+    flex-direction: row;    
+    margin-right: auto
+}

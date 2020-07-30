@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="Lab1.css">
+        <script>
+            validateData(){
+                var pwd = document.getElementById("passWord");
+                var studentID = document.getElementById("studID");
+                var user  = document.getElementById("username");           
+                var vUser = validateUsername(user);
+                var vId = validateStudID(studID);
+                var vPwd = validatePwd(pwd);
+                
+                validateFailure(vUser, vId, vPwd);
+            }
+            
+            validateUsername(var user){
+                var lettersOnly = /^[A-Za-z]+$/; //regular expression to ensure letters only
+                if(studentID.value.match(lettersOnly)){
+                    console.log("Username is all letters");                
+                    return 1;
+                } else {
+                    console.log("studentID is NOT all letters");
+                    return 0;
+                }
+            }
+            
+            validateStudID(var studentID){
+                var digitOnly = /^[0-9]+$/; //regEx to ensure digits only
+                if(studentID.value.match(digitOnly)){
+                    console.log("studentID is all digits");                
+                    return 1;
+                } else {
+                    console.log("studentID is NOT all digits");
+                    return 0;
+                }
+            }
+            
+            validatePwd(var pwd){
+                if (pwd.length < 3) {
+                    return 0; //have 3 requirements therefore pwd must be at least 3 char
+                }
+                if (str.search(/\d/) == -1) {
+                    return 0; //check that there is at least one number
+                }
+                if (str.search(/[a-z]/) == -1) {
+                    return 0; //check there is at least one lowercase
+                }
+                if (str.search(/[A-Z]/) == -1) {
+                    return 0; //check there is at least one uppercase
+                } 
+                return("ok");
+            }
+            
+            validFailure(var vUser, var vId, var vPwd){
+                var fail = 0;
+                if(vId == 0){
+                    //display error for Student ID
+                    fail++;
+                }
+                if(vUser == 0){
+                    //display error for Username
+                    fail++;
+                }
+                //figure password validation
+                
+                if(fail > 0){
+                    //something failed, deploy failure mode
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div class="formsdiv">
+            <form action="/action_page.php">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <label for="passWord">Password:</label>            
+                <input type="password" id="passWord" name="passWord" minlength="3"><br><br>
+                <label for="studID">Student ID:</label>
+                <input type="text" id="studID" name="studID"><br><br> 
+                <label for="textMessage">Message:</label>
+                <textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+                <button type="button" onclick="validateData()">Submit</button> 
+            </form>
+        </div>
+        <div class = "textarea">
+            
+        </div>
+        <div id = “success”>
+            <img src="success.jpg" alt="TorresDesign1_LinkToStackOF" width="200" height="65">
+        </div>       
+
+    </body>
+</html>
