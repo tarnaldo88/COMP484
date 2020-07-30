@@ -37,19 +37,17 @@
             }
             
             validatePwd(var pwd){
-                if (pwd.length < 3) {
-                    return 0; //have 3 requirements therefore pwd must be at least 3 char
-                }
+                var fails[3] = {0};
                 if (str.search(/\d/) == -1) {
-                    return 0; //check that there is at least one number
+                    fails[0] = 1; //check that there is at least one number
                 }
                 if (str.search(/[a-z]/) == -1) {
-                    return 0; //check there is at least one lowercase
+                    fails[1] = 1; //check there is at least one lowercase
                 }
                 if (str.search(/[A-Z]/) == -1) {
-                    return 0; //check there is at least one uppercase
+                    fails[2] = 1; //check there is at least one uppercase
                 } 
-                return("ok");
+                return fails;
             }
             
             validFailure(var vUser, var vId, var vPwd){
@@ -62,13 +60,24 @@
                     //display error for Username
                     fail++;
                 }
-                //figure password validation
+                //for Password check through the 3 possibilities for failure
+                if(vPwd[0] == 1){
+                    fail++;
+                    //number check failed
+                }
+                if(vPwd[1] == 1){
+                    fail++;
+                    //lowercase check failed
+                }
+                if(vPwd[2] == 1){
+                    fail++;
+                    //uppercase check failed
+                }
                 
                 if(fail > 0){
                     //something failed, deploy failure mode
                 }
-            }
-            
+            }            
         </script>
     </head>
     <body>
