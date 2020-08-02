@@ -1,7 +1,30 @@
-#success {
-    display: none;
+.wrapper{
+    
 }
 
 .formsdiv {
-    
+    background-color: chartreuse;
+}
+
+#successImg {
+    visibility: hidden;
+}
+
+#userImg{
+    visibility: hidden;
+}
+
+#pwdDigitFail{
+    visibility: hidden;
+}
+
+#pwdUpperFail{
+    visibility: hidden;
+}
+
+#pwdLowerFail{
+    visibility: hidden;
+}
+#studIDImg{
+    visibility: hidden;
 }

@@ -6,7 +6,8 @@
             validateData(){
                 var pwd = document.getElementById("passWord");
                 var studentID = document.getElementById("studID");
-                var user  = document.getElementById("username");           
+                var user  = document.getElementById("username"); 
+                var formDiv = document.getElementById("formsdiv");
                 var vUser = validateUsername(user);
                 var vId = validateStudID(studID);
                 var vPwd = validatePwd(pwd);
@@ -54,52 +55,69 @@
                 var fail = 0;
                 if(vId == 0){
                     //display error for Student ID
+                    document.getElementById("studIDImg").style.visibility = "visible";
                     fail++;
                 }
                 if(vUser == 0){
                     //display error for Username
+                    document.getElementById("userImg").style.visibility = "visible";
                     fail++;
                 }
                 //for Password check through the 3 possibilities for failure
                 if(vPwd[0] == 1){
                     fail++;
                     //number check failed
+                    document.getElementById("pwdDigitFail").style.visibility = "visible";
                 }
                 if(vPwd[1] == 1){
                     fail++;
                     //lowercase check failed
+                    document.getElementById("pwdLowerFail").style.visibility = "visible";
                 }
                 if(vPwd[2] == 1){
                     fail++;
                     //uppercase check failed
+                    document.getElementById("pwdUpperFail").style.visibility = "visible";
                 }
                 
                 if(fail > 0){
                     //something failed, deploy failure mode
+                    document.body.style.backgroundColor = "red";
+                    
+                } else {
+                    formDiv.style.backgroundColor = 'green';s
+                    document.getElementById("success").style.visibility = "visible";
                 }
             }            
         </script>
     </head>
     <body>
-        <div class="formsdiv">
-            <form action="/action_page.php">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username"><br><br>
-                <label for="passWord">Password:</label>            
-                <input type="password" id="passWord" name="passWord" minlength="3"><br><br>
-                <label for="studID">Student ID:</label>
-                <input type="text" id="studID" name="studID"><br><br> 
-                <label for="textMessage">Message:</label>
-                <textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+        <div class = "wrapper">
+            <div class="formsdiv">
+                <form action="/action_page.php">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username"><br><br>
+                    <label for="passWord">Password:</label>            
+                    <input type="password" id="passWord" name="passWord" minlength="3"><br><br>
+                    <label for="studID">Student ID:</label>
+                    <input type="text" id="studID" name="studID"><br><br> 
+                    <label for="textMessage">Message:</label>
+                    <textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+                </form>
                 <button type="button" onclick="validateData()">Submit</button> 
-            </form>
+            </div>
+            <div class = "textarea">
+
+            </div>
+            <div class = “success”>
+                <img id = "successImg" src="success.jpg" alt="TorresSuccessImage">
+                <img id = "userImg" src= "usernameFail.png" alt ="TorresUsernameFail">
+                <img id = "pwdDigitFail" src= "pwdDigitFail.png" alt ="TorresPasswordFail">
+                <img id = "pwdLowerFail" src= "pwdLowerFail.png" alt ="TorresPasswordFail">
+                <img id = "pwdUpperFail" src= "pwdUpperFail.png" alt ="TorresPasswordFail">
+                <img id = "studIDImg" src= "studIDFail.png" alt ="TorresIDFail">
+            </div>       
         </div>
-        <div class = "textarea">
-            
-        </div>
-        <div id = “success”>
-            <img src="success.jpg" alt="TorresDesign1_LinkToStackOF" width="200" height="65">
-        </div>       
 
     </body>
 </html>
