@@ -3,11 +3,12 @@
     <head>
         <link rel="stylesheet" href="Lab1.css">
         <script>
-            validateData(){
-                var pwd = document.getElementById("passWord");
-                var studentID = document.getElementById("studID");
-                var user  = document.getElementById("username"); 
-                var formDiv = document.getElementById("formsdiv");
+            
+            function validateData(){
+                var pwd = document.getElementById("passWord").value;
+                var studentID = document.getElementById("studID").value;
+                var user  = document.getElementById("username").value; 
+                //var formDiv = document.getElementById("formsdiv").value;
                 var vUser = validateUsername(user);
                 var vId = validateStudID(studID);
                 var vPwd = validatePwd(pwd);
@@ -15,20 +16,32 @@
                 validateFailure(vUser, vId, vPwd);
             }
             
-            validateUsername(var user){
-                var lettersOnly = /^[A-Za-z]+$/; //regular expression to ensure letters only
-                if(studentID.value.match(lettersOnly)){
+            function validateUsername(user){
+                let lettersOnly = /[^a-zA-Z]+$/; //regular expression to ensure letters only
+
+                if(user.length <= 0){
+                    console.log("username field is empty");
+                    return 0;
+                }
+
+                if(user.search(lettersOnly) == -1){
                     console.log("Username is all letters");                
                     return 1;
                 } else {
-                    console.log("studentID is NOT all letters");
+                    console.log("username is NOT all letters");
                     return 0;
                 }
             }
             
-            validateStudID(var studentID){
-                var digitOnly = /^[0-9]+$/; //regEx to ensure digits only
-                if(studentID.value.match(digitOnly)){
+            function validateStudID(studentID){
+                let digitOnly = /^[0-9]+$/; //regEx to ensure digits only
+                var id = studentID.toString();
+                if(id.length < 9){
+                    console.log("studentID is too short"); 
+                    return 0;
+                }
+
+                if(id.search(digitOnly) == -1){
                     console.log("studentID is all digits");                
                     return 1;
                 } else {
@@ -37,21 +50,24 @@
                 }
             }
             
-            validatePwd(var pwd){
-                var fails[3] = {0};
-                if (str.search(/\d/) == -1) {
+            function validatePwd(pwd){
+                var fails = new Array(3).fill(0);
+                let dig = /\d/;
+                let upper = /[A-Z]/;
+                let lower = /[a-z]/;
+                if (pwd.search(dig) == -1) {
                     fails[0] = 1; //check that there is at least one number
                 }
-                if (str.search(/[a-z]/) == -1) {
+                if (pwd.search(lower) == -1) {
                     fails[1] = 1; //check there is at least one lowercase
                 }
-                if (str.search(/[A-Z]/) == -1) {
+                if (pwd.search(upper) == -1) {
                     fails[2] = 1; //check there is at least one uppercase
                 } 
                 return fails;
             }
             
-            validFailure(var vUser, var vId, var vPwd){
+            function validateFailure(vUser,vId,vPwd){
                 var fail = 0;
                 if(vId == 0){
                     //display error for Student ID
@@ -94,7 +110,7 @@
     <body>
         <div class = "wrapper">
             <div class="formsdiv">
-                <form action="/action_page.php">
+                <form >
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username"><br><br>
                     <label for="passWord">Password:</label>            
@@ -109,7 +125,7 @@
             <div class = "textarea">
 
             </div>
-            <div class = “success”>
+            <div class = “images”>
                 <img id = "successImg" src="success.jpg" alt="TorresSuccessImage">
                 <img id = "userImg" src= "usernameFail.png" alt ="TorresUsernameFail">
                 <img id = "pwdDigitFail" src= "pwdDigitFail.png" alt ="TorresPasswordFail">
