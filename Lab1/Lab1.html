@@ -2,8 +2,23 @@
 <html>
     <head>
         <link rel="stylesheet" href="Lab1.css">
-        <script>
-            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+            $(document).ready(function() {
+                console.log("in outer function");
+                $("#textMessage").on('keydown', function(e) {
+                    console.log("inside function");
+                    var stringsTyped = $.trim(this.value).length ? this.value.match(/\S+/g).length : 0;
+                    if (words <= 25) {                        
+                        $('#words_left').text(25 - stringsTyped);
+                        console.log("subtracting a word");
+                    }else{
+                        if (e.which !== 8) e.preventDefault();
+                        console.log("in the else statement");
+                    }
+                });
+            });       
+        </script>            
+           <script>
             function validateData(){
                 var pwd = document.getElementById("passWord").value;
                 var studentID = document.getElementById("studID").value;
@@ -105,7 +120,7 @@
                 } else {                    
                     document.getElementById("successImg").style.visibility = "visible";
                 }
-            }            
+            }  
         </script>
     </head>
     <body>
@@ -118,9 +133,10 @@
                     <input type="password" id="passWord" name="passWord" minlength="3"><br><br>
                     <label for="studID">Student ID:</label>
                     <input type="text" id="studID" name="studID"><br><br> 
-                    <label for="textMessage">Message:</label>
-                    <textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+                    <label for="textMessage">Message:</label>                    
                 </form>
+                <br><textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+                <br>Words Left: <span id="words_left">25</span><br>
                 <button type="button" onclick="validateData()">Submit</button> 
             </div>
             <div class = "textarea">
