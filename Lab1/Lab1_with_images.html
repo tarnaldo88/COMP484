@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="Lab1.css">                
+        <script>
+            function validateData(){
+                var pwd = document.getElementById("passWord").value;
+                var studentID = document.getElementById("studID").value;
+                var user  = document.getElementById("username").value;                
+                var vUser = validateUsername(user);
+                var vId = validateStudID(studentID);
+                var vPwd = validatePwd(pwd);
+                
+                validateFailure(vUser, vId, vPwd);
+            }
+            
+            function validateUsername(user){
+                let lettersOnly = /[^a-zA-Z]+$/; //regular expression to ensure letters only
+
+                if(user.length <= 0){
+                    console.log("username field is empty");
+                    return 0;
+                }
+
+                if(user.search(lettersOnly) == -1){
+                    console.log("Username is all letters");                
+                    return 1;
+                } else {
+                    console.log("username is NOT all letters");
+                    return 0;
+                }
+            }
+            
+            function validateStudID(studentID){
+                let digitOnly = /^[0-9]+$/; //regEx to ensure digits only
+                var id = studentID.toString();
+                if(id.length < 9 || id.length > 9){
+                    console.log("studentID is improper length"); 
+                    return 0;
+                }
+
+                if(id.search(digitOnly) == -1){
+                    console.log("studentID is all digits");                
+                    return 1;
+                } else {
+                    console.log("studentID is NOT all digits");
+                    return 0;
+                }
+            }
+            
+            function validatePwd(pwd){
+                var fails = new Array(3).fill(0);
+                let dig = /\d/;
+                let upper = /[A-Z]/;
+                let lower = /[a-z]/;
+                if (pwd.search(dig) == -1) {
+                    fails[0] = 1; //check that there is at least one number
+                    console.log("needs a number");
+                }
+                if (pwd.search(lower) == -1) {
+                    fails[1] = 1; //check there is at least one lowercase
+                    console.log("needs a lowercase");
+                }
+                if (pwd.search(upper) == -1) {
+                    fails[2] = 1; //check there is at least one uppercase
+                    console.log("needs an uppercase");
+                } 
+                return fails;
+            }
+            
+            function validateFailure(vUser,vId,vPwd){
+                var fail = 0;
+                if(vId == 0){
+                    //display error for Student ID
+                    document.getElementById("studIDImg").style.visibility = "visible";
+                    document.getElementById("idNum").textContent = "Student ID cannot have letters and must be 9 digits";
+                    document.getElementById("idNum").style.color = "white";
+                    fail++;
+                }
+                if(vUser == 0){
+                    //display error for Username
+                    document.getElementById("userImg").style.visibility = "visible";
+                    document.getElementById("uName").textContent = "Username Cannot have numbers";
+                    document.getElementById("uName").style.color = "white";
+                    fail++;
+                }
+                //for Password check through the 3 possibilities for failure
+                if(vPwd[0] == 1){
+                    fail++;
+                    //number check failed
+                    document.getElementById("pwdDigitFail").style.visibility = "visible";
+                    document.getElementById("pwdDig").textContent = "Password needs Numbers";
+                    document.getElementById("pwdDig").style.color = "white";
+                }
+                if(vPwd[1] == 1){
+                    fail++;
+                    //lowercase check failed
+                    document.getElementById("pwdLowerFail").style.visibility = "visible";
+                    document.getElementById("pwdLow").textContent = "Password needs lowercase letters";
+                    document.getElementById("pwdLow").style.color = "white";
+                }
+                if(vPwd[2] == 1){
+                    fail++;
+                    //uppercase check failed
+                    document.getElementById("pwdUpperFail").style.visibility = "visible";
+                    document.getElementById("pwdUp").textContent = "Password needs uppercase letters";
+                    document.getElementById("pwdUp").style.color = "white";
+                }
+                
+                if(fail > 0){
+                    //something failed, deploy failure mode
+                    document.body.style.backgroundColor = "red";
+                    
+                } else {                    
+                    document.getElementById("successImg").style.visibility = "visible";
+                }
+            }  
+            function wordCounter(e){
+                var wordLeft = document.getElementById("words_left");
+                var backspace = 8;
+                var del = 46;
+                var maxWords = 25;
+                var valid_keys  = [backspace, del];
+                var strings = this.value.split(' ');
+
+                wordLeft.textContent = maxWords - strings.length + 1;
+
+                if (strings.length > 25 && valid_keys.indexOf(e.keyCode) == -1) {
+                    e.preventDefault();
+                    strings.length = 25;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class = "wrapper">
+            <div class="formsdiv">
+                <form>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username"><br><br>
+                    <label for="passWord">Password:</label>            
+                    <input type="password" id="passWord" name="passWord" minlength="3"><br><br>
+                    <label for="studID">Student ID:</label>
+                    <input type="text" id="studID" name="studID"><br><br>                                        
+                </form>
+                <label for="textMessage">Message:</label> 
+                <div class = "textarea">
+                    <textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+                    <br>Words Left: <span id="words_left">25</span><br>
+                </div>
+                <button type="button" onclick="validateData()">Submit</button> 
+            </div>
+            <div class = "errorMessages">
+                <span id="uName"></span><br>
+                <span id="pwdDig"></span><br>
+                <span id="pwdUp"></span><br>
+                <span id="pwdLow"></span><br>
+                <span id="idNum"></span><br>
+
+            </div>
+            <div class = “images”>
+                <img id = "successImg" src="success.jpg" alt="TorresSuccessImage">
+                <img id = "userImg" src= "usernameFail.png" alt ="TorresUsernameFail">
+                <img id = "pwdDigitFail" src= "pwdDigitFail.png" alt ="TorresPasswordFail">
+                <img id = "pwdLowerFail" src= "pwdLowerFail.png" alt ="TorresPasswordFail">
+                <img id = "pwdUpperFail" src= "pwdUpperFail.png" alt ="TorresPasswordFail">
+                <img id = "studIDImg" src= "studIDFail.png" alt ="TorresIDFail">
+            </div>       
+        </div>
+        <script>
+            //kept getting null error with eventlistener being declared before the 
+            //object it wants to listen to has been declared, so moved listeners to body
+            document.getElementById('textMessage').addEventListener('keydown', wordCounter);
+            document.getElementById('textMessage').addEventListener('keyup', wordCounter);
+        </script>
+    </body>
+</html>
