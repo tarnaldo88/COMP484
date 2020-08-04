@@ -7,8 +7,7 @@
             function validateData(){
                 var pwd = document.getElementById("passWord").value;
                 var studentID = document.getElementById("studID").value;
-                var user  = document.getElementById("username").value; 
-                //var formDiv = document.getElementById("formsdiv").value;
+                var user  = document.getElementById("username").value;                
                 var vUser = validateUsername(user);
                 var vId = validateStudID(studID);
                 var vPwd = validatePwd(pwd);
@@ -57,12 +56,15 @@
                 let lower = /[a-z]/;
                 if (pwd.search(dig) == -1) {
                     fails[0] = 1; //check that there is at least one number
+                    console.log("needs a number");
                 }
                 if (pwd.search(lower) == -1) {
                     fails[1] = 1; //check there is at least one lowercase
+                    console.log("needs a lowercase");
                 }
                 if (pwd.search(upper) == -1) {
                     fails[2] = 1; //check there is at least one uppercase
+                    console.log("needs an uppercase");
                 } 
                 return fails;
             }
@@ -100,9 +102,8 @@
                     //something failed, deploy failure mode
                     document.body.style.backgroundColor = "red";
                     
-                } else {
-                    formDiv.style.backgroundColor = 'green';s
-                    document.getElementById("success").style.visibility = "visible";
+                } else {                    
+                    document.getElementById("successImg").style.visibility = "visible";
                 }
             }            
         </script>
