@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="Lab1.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-            $(document).ready(function() {
-                console.log("in outer function");
-                $("#textMessage").on('keydown', function(e) {
-                    console.log("inside function");
-                    var stringsTyped = $.trim(this.value).length ? this.value.match(/\S+/g).length : 0;
-                    if (words <= 25) {                        
-                        $('#words_left').text(25 - stringsTyped);
-                        console.log("subtracting a word");
-                    }else{
-                        if (e.which !== 8) e.preventDefault();
-                        console.log("in the else statement");
-                    }
-                });
-            });       
-        </script>            
-           <script>
+        <link rel="stylesheet" href="Lab1.css">                
+        <script>
             function validateData(){
                 var pwd = document.getElementById("passWord").value;
                 var studentID = document.getElementById("studID").value;
@@ -121,26 +105,44 @@
                     document.getElementById("successImg").style.visibility = "visible";
                 }
             }  
+            function wordCounter(e){
+                var wordLeft = document.getElementById("words_left");
+                var backspace = 8;
+                var del = 46;
+                var maxWords = 25;
+                var valid_keys  = [backspace, del];
+                var strings = this.value.split(' ');
+
+                wordLeft.textContent = maxWords - strings;
+
+                if (strings.length >= 25 && valid_keys.indexOf(e.keyCode) == -1) {
+                    e.preventDefault();
+                    strings.length = 25;
+                    this.value = words.join(' ');
+                }
+            }            
+            var textMessage = document.getElementById('textMessage');
+            textMessage.addEventListener('keydown', wordCounter);
+            textMessage.addEventListener('keyup', wordCounter);
         </script>
     </head>
     <body>
         <div class = "wrapper">
             <div class="formsdiv">
-                <form >
+                <form>
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username"><br><br>
                     <label for="passWord">Password:</label>            
                     <input type="password" id="passWord" name="passWord" minlength="3"><br><br>
                     <label for="studID">Student ID:</label>
-                    <input type="text" id="studID" name="studID"><br><br> 
-                    <label for="textMessage">Message:</label>                    
+                    <input type="text" id="studID" name="studID"><br><br>                                        
                 </form>
-                <br><textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
-                <br>Words Left: <span id="words_left">25</span><br>
+                <label for="textMessage">Message:</label> 
+                <div class = "textarea">
+                    <textarea id="textMessage" name="textMessage" rows="4" cols="50"></textarea>
+                    <br>Words Left: <span id="words_left">25</span><br>
+                </div>
                 <button type="button" onclick="validateData()">Submit</button> 
-            </div>
-            <div class = "textarea">
-
             </div>
             <div class = “images”>
                 <img id = "successImg" src="success.jpg" alt="TorresSuccessImage">
