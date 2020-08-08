@@ -32,19 +32,19 @@
             }
             
             function validateStudID(studentID){
-                let digitOnly = /^[0-9]+$/; //regEx to ensure digits only
+                let digitOnly = /^[0-9]*$/; //regEx to ensure digits only
                 var id = studentID.toString();
-                if(id.length < 9 || id.length > 9){
+
+                if(id.length != 9){
                     console.log("studentID is improper length"); 
                     return 0;
                 }
-
-                if(id.search(digitOnly) == -1){
-                    console.log("studentID is all digits");                
-                    return 1;
-                } else {
+                if(id.search(digitOnly) == -1){                    
                     console.log("studentID is NOT all digits");
                     return 0;
+                } else {
+                    console.log("studentID is all digits");                
+                    return 1;
                 }
             }
             
