@@ -1,0 +1,68 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  font-size: 100%;
+  background-image: url("torresIndustries.png");
+}
+
+.header {
+  width: 30%;
+  margin: 70px auto 0px;
+  color: white;
+  background: #4200A2;
+  text-align: center;
+  border: 2px solid #4200A2;
+  border-bottom: none;  
+  padding: 10px;
+}
+form, .content {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid #4200A2;
+  background: white; 
+}
+.field {
+  margin: 10px 0px 10px 0px;
+}
+
+.button {
+    padding: 5px;
+    font-size: 14px;
+    color: white;
+    background: #4200A2;
+    border: none;
+    border-radius: 5px;
+}
+
+.buttoncolors {
+    padding: 5px;
+    font-size: 14px;
+    font-style: oblique;
+    background: #CED3D2;
+    border: none;
+    border-radius: 5px;
+}
+.error {
+  width: 92%; 
+  margin: 0px auto; 
+  padding: 10px; 
+  border: 1px solid #a94442; 
+  color: #a94442; 
+  background: #f2dede; 
+  border-radius: 5px; 
+  text-align: left;
+}
+.success {
+  color: #3c763d; 
+  background: #dff0d8; 
+  border: 1px solid #3c763d;
+  margin-bottom: 20px;
+}
+
+#successImg {
+    padding: 20px;
+    align-content: center;
+}
