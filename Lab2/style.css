@@ -64,5 +64,7 @@ form, .content {
 
 #successImg {
     padding: 20px;
+    width: 30%;
+    margin: 70px auto 0px;
     align-content: center;
 }

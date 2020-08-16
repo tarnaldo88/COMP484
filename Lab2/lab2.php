@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
   }
 
   if (empty($error_list)) {
-  	//$password = md5($password);
+  	$password = md5($password);
   	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
   	$results = mysqli_query($db, $query) or die(mysql_error());
   	if (mysqli_num_rows($results) == 1) {
@@ -62,7 +62,7 @@ if (isset($_POST['reg'])) {
          array_push($error_list, "Username already exists");
     } else {
         $query = "INSERT into `users` (username, password)
-             VALUES ('$username', '".$password."')";    
+             VALUES ('$username', '".md5($password)."')";    
          $results = mysqli_query($db, $query);
   	     $_SESSION['username'] = $username;
   	     $_SESSION['success'] = "You are now logged in";
@@ -74,24 +74,7 @@ if (isset($_POST['reg'])) {
 <head>
   <title>Torres Industries Login/Registration</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-    <script>        
-        var count = 0;
-        function colorChange(){
-            if(count >= 3){
-                count = 0;
-                document.body.style.backgroundImage = "url('torresIndustries.png')";
-            } else if(count === 0){
-                count++;
-                document.body.style.backgroundImage = "url('COOLtorresIndustries.png')";
-            } else if(count === 1){
-                count++;
-                document.body.style.backgroundImage = "url('WARMtorresIndustries.png')";
-            } else if(count == 2){
-                count++;
-                document.body.style.backgroundImage = "url('RetrotorresIndustries.png')";
-            }
-        }
-    </script>
+    
 </head>
 <body>    
   <div class="header">
@@ -119,8 +102,7 @@ if (isset($_POST['reg'])) {
   	  <button type="submit" class="button" name="reg">Register Yourself For The Future Of Mankind</button>
         <br>Already a member?<br>  
          <button type="submit" class="button" name="login">Sign in</button>
-  	</div>
-      <button type="button" class="buttoncolors" name="colorBtn" onclick="colorChange()">Keep Clicking To Alternate Through Themes</button>
+  	</div>     
   </form>        
 </body>
 </html>
