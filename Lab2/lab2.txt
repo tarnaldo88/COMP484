@@ -1,0 +1,48 @@
+LAB2 README:
+
+Files included are: 
+                    Various image files
+                    indexLogin.php
+                    lab2.php
+                    style.css
+                    Adobe Illustrator files
+
+Various Image files & Adobe Illustrator files:
+
+            Included to show I made the images myself, and needed for the website to properly display images
+
+lab2.php :
+
+            main page that shows the forms to login or register a new user.
+            The php section of this file, contains three sections. 
+            1) The first section is to connect to the database, and declare an array that will be used for error messages.
+            2) The second section is for users logging in. It is based of an if conditional and then procceeds to strip the
+               string of potential unnecessary characters and then proceeds to ensure that characters were entered into the fields.
+               The next step is to check that the error array is empty, and if so then proceeds to hash the password, and query the 
+               database to see if the username password combination exists. 
+               If successful, it echos success and procceeds to move to the indexLogin page for users.
+               If unsuccessful, then pushes error of invalid username or password.
+            3) The third section is for the registering of new users. This section performs the same preparing actions to the strings
+               given by the user. Then does the necessary check to ensure the fields were not left empty. If the entries are not empty then 
+               it will proceed to check for duplicate usernames. This is completed by doing a query to the database. The first function will 
+               return a value greater than 0 if it finds a match. The next function used in the if condition, mysqli_num_rows, gets the number of 
+               rows in a result, if this is greater than zero, then we know that there has been a match. 
+               If there are no matches, then a query is made to insert the username and password and the password is hashed. Then a success message is given 
+               and the new user is sent to the users page.
+
+indexLogin.php : 
+
+            User page for users that have logged in or created an account.
+            contains a php if conditional to check that someone has is a user has entered the page, and that the page is not being accessed while 
+            unauthorized. If user has entered legally, then a check is done to see if the user is Administrator. If so then the page is different 
+            compared to a regular user. The page contains a table with the database contents of usernames and passwords. This is done by connecting to the
+            database and then doing a mysql query get the usernames and passwords and order them by username in ascending order. 
+            Then a table is created and a while loop to go through the contents of the database until everything has been displayed on the screen.
+
+            The rest of the page is the same for all users, firstly an image displaying their successful login, and then a button that can alter the 
+            background image of the page, giving the illusion of altering the color theme. 
+            There is also a logout link provided that takes them back the lab2.php page.
+style.css :
+
+            CSS page containing all the styling for the page, mostly simple styling taken on the various divs and this style sheet is used on both lab2 and 
+            indexLogin so as to ensure a similar feel depending on which page the user is on.
