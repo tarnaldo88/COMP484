@@ -1,5 +1,6 @@
 LAB2 README:
-
+Programmer/Designer: Arnaldo Torres
+Date Due: 8/18/20
 Files included are: 
                     Various image files
                     indexLogin.php
